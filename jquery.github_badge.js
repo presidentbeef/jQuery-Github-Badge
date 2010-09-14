@@ -13,13 +13,22 @@
  * Licensed under the MIT license.
  */
 
+/*
+ * JavaScript Pretty Date
+ * Copyright (c) 2008 John Resig (jquery.com)
+ * Licensed under the MIT license.
+ */
+
 // Takes an ISO time and returns a string representing how
 // long ago the date represents.
 
 function prettyDate(time) {
+    alert("pretty date was called: " + time);
     var date = new Date((time || "").replace(/-/g,"/").replace(/[TZ]/g," ")),
         diff = (((new Date()).getTime() - date.getTime()) / 1000),
         day_diff = Math.floor(diff / 86400);
+        
+    alert(date + diff + day_diff);    
             
     if ( isNaN(day_diff) || day_diff < 0 || day_diff >= 31 )
         return;
@@ -33,18 +42,19 @@ function prettyDate(time) {
         day_diff == 1 && "Yesterday" ||
         day_diff < 7 && day_diff + " days ago" ||
         day_diff < 31 && Math.ceil( day_diff / 7 ) + " weeks ago";
-    }
+}
 
-    // If jQuery is included in the page, adds a jQuery plugin to handle it as well
-    
-    if ( typeof jQuery != "undefined" )
-    jQuery.fn.prettyDate = function(){
-        return this.each(function(){
-            var date = prettyDate(this.title);
-            if ( date )
-                jQuery(this).text( date );
-        });
-    };
+// If jQuery is included in the page, adds a jQuery plugin to handle it as well
+
+if ( typeof jQuery != "undefined" )
+jQuery.fn.prettyDate = function(){
+    return this.each(function(){
+        var date = prettyDate(this.title);
+        if ( date )
+            jQuery(this).text( date );
+    });
+};
+
 
 
 // avoid javascript errors on browsers that aren't using FireBug.
@@ -156,9 +166,16 @@ function prettyDate(time) {
 
     render = function (template, data) {
         return template.replace(/\{\{([-_a-z]+)\}\}/g, function (m, key, value) {
-          return data[key] ? data[key] : "None";
+            // console.log (key);
+            if ((key === "created_at") || (key === "pushed_at") || (key === "committed_date")) {
+                // var date_value = prettyDate(data[key]);
+                // alert(date_value);
+                return data[key] ? data[key] : "None";
+            } else {
+                return data[key] ? data[key] : "None";
+            }
         });
-    },
+    },  
 
   buildUser = function(where, options) {
     var 
