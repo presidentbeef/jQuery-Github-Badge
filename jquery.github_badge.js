@@ -7,6 +7,7 @@
  * http://www.maverickconceptions.com/about/license/
  */
 
+
 /*
  * JavaScript Pretty Date
  * Copyright (c) 2008 John Resig (jquery.com)
@@ -54,6 +55,7 @@ jQuery.fn.prettyDate = function(){
             jQuery(this).text( date );
     });
 };
+
 
 
 
