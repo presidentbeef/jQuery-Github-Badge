@@ -59,6 +59,7 @@ jQuery.fn.prettyDate = function(){
 
 
 
+
 // avoid javascript errors on browsers that aren't using FireBug.
 (function ($) {
 
