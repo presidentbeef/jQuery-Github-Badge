@@ -170,15 +170,16 @@
               else
                 return 0;
              })
+
+            if (options.sorting !== "ascending" ) {
+                repos.reverse();
+            }
             
             $.each(repos, function (i, obj) {
                 rows.push(render(repo_row_template, obj));
                 if ( i === (options.repo_count - 1) ) return false;
             });
-            
-            if (options.sorting !== "ascending" ) {
-                rows.reverse();
-            }
+
             
             repo_list
               .html(rows.join(''))
