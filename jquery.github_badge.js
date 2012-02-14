@@ -116,7 +116,7 @@
 
     render = function (template, data) {
         return template.replace(/\{\{([-_a-z]+)\}\}/g, function (m, key, value) {
-          return data[key] ? data[key] : "None";
+          return data[key] ? data[key] : "";
         });
     },
 
