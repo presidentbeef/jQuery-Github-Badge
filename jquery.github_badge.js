@@ -161,8 +161,17 @@
             repo_list.html('<li class="no_records">' + options.login +' Does Not Have Any Repos</li>');
         } else {
             var rows = [];
+
+            var repos = data.repositories.sort(function(a,b) {
+              if (a.pushed_at < b.pushed_at)
+                return 1;
+              else if (a.pushed_at > b.pushed_at)
+                return -1;
+              else
+                return 0;
+             })
             
-            $.each(data.repositories, function (i, obj) {
+            $.each(repos, function (i, obj) {
                 rows.push(render(repo_row_template, obj));
                 if ( i === (options.repo_count - 1) ) return false;
             });
